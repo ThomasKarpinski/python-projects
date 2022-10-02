@@ -6,7 +6,7 @@ class Bullet(Sprite):
     """Klasa przeznaczona do zarządzania pociskami wystrzeliwanymi przez statek."""
 
     def __init__(self, ai_game):
-        """Utworzenie obiektu pocisku w aktualnym położeniu statku"""
+        """Utworzenie obiektu pocisku w aktualnym położeniu statku."""
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
@@ -20,3 +20,14 @@ class Bullet(Sprite):
 
         # Położenie pocisku jest zdefiniowane za pomocą wartości zmiennoprzecinkowej
         self.y = float(self.rect.y)
+
+    def update(self):
+        """Poruszanie pociskiem po ekranie."""
+        # Uaktualnienie położenia pocisku
+        self.y -= self.settings.bullet_speed
+        # Uaktualnienie położenia prostokąta pocisku
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """Wyświetlanie pocisku na ekranie."""
+        pygame.draw.rect(self.screen, self.color, self.rect)
